@@ -3,8 +3,9 @@
 
         {{-- 1. アーティスト写真 --}}
         <section id="artist-photos">
-            <h2 class="text-xl font-bold">アーティスト写真</h2>
-            {{-- スライドショー表示予定 --}}
+            <figure class="ph">
+                <img class="pc" src="{{ 'images/artist.png' }}" alt="lilac">
+            </figure>
         </section>
 
         {{-- 2. お知らせ --}}

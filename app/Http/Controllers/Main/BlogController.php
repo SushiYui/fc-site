@@ -5,13 +5,38 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
-        return view('blogs.index', compact('blogs'));
+
+        // ③ カテゴリー絞り込み
+        // 表示用：英語名 => 日本語名の対応
+        $categoryMap = [
+            'chiikawa' => 'ちいかわ',
+            'hachiwari' => 'ハチワレ',
+            'usagi' => 'うさぎ',
+            'staff' => 'スタッフ',
+        ];
+
+        // 表示するリンク用：英語の配列
+        $categories = array_keys($categoryMap);
+
+        // ブログのクエリを作成
+        $query = Blog::query()->with(['admin']); // 後で admin 関連を使いたいから with する
+
+        // カテゴリ（投稿者）で絞り込み
+        if ($request->has('category') && isset($categoryMap[$request->category])) {
+            $adminName = $categoryMap[$request->category];
+
+            $query->whereHas('admin', function ($q) use ($adminName) {
+                $q->where('name', $adminName);
+            });
+        }
+        return view('blogs.index', compact('blogs', 'categories', 'categoryMap'));
     }
 
     //

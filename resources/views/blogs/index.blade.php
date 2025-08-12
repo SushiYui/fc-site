@@ -16,6 +16,16 @@
                     </div>
                 @endif
 
+            <div class="flex flex-wrap gap-2">
+                @foreach($categories as $category)
+                    <a href="{{ route('blogs.index', ['category' => $category]) }}"
+                    class="px-4 py-1 border rounded bg-gray-100 hover:bg-gray-200 text-sm {{ request('category') === $category ? 'bg-blue-200' : '' }}">
+                    {{ $categoryMap[$category] }}
+                    </a>
+                @endforeach
+            </div>
+
+
                 @foreach($blogs as $blog)
                     <div class="mb-8 border-b pb-4">
                         {{-- 画像 --}}

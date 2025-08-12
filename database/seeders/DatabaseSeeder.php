@@ -20,6 +20,17 @@ class DatabaseSeeder extends Seeder
         AdminSeeder::class, // ← これを追加！
     ]);
 
+    // ユーザー登録
+        User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => Hash::make('password'), // パスワード必須
+            'postal_code'=> '',
+            'city',
+            'building',
+            'phone_number',
+        ]);
+
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

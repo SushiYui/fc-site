@@ -10,19 +10,31 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        Admin::insert([
+        Admin::updateOrInsert(
+            ['email' => 'usagi@usagi.com'],
             [
                 'name' => 'うさぎ',
-                'email' => 'usagi@usagi.com',
                 'password' => Hash::make('usagi'),
                 'user_id' => 4,
-            ],
+            ]
+        );
+
+        Admin::updateOrInsert(
+            ['email' => 'staff@staff.com'],
             [
                 'name' => 'スタッフ',
-                'email' => 'staff@staff.com',
                 'password' => Hash::make('staff'),
                 'user_id' => 5,
-            ],
-        ]);
+            ]
+        );
+
+        Admin::updateOrInsert(
+            ['email' => 'testadmin@example.com'],
+            [
+                'name' => 'テスト管理者',
+                'password' => Hash::make('testadmin'),
+                'user_id' => 1,
+            ]
+        );
     }
 }

@@ -18,7 +18,7 @@ class LiveController extends Controller
     //
     public function create()
     {
-        return view('live.create');
+        return view('lives.create');
     }
 
     public function store(Request $request)
