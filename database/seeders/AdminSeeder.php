@@ -28,13 +28,16 @@ class AdminSeeder extends Seeder
             ]
         );
 
-        Admin::updateOrInsert(
-            ['email' => 'testadmin@example.com'],
-            [
-                'name' => 'テスト管理者',
-                'password' => Hash::make('testadmin'),
-                'user_id' => 1,
-            ]
-        );
-    }
+
+$testUserId = config('seeder.test_user_id');
+
+Admin::updateOrInsert(
+    ['email' => 'test@example.com'],
+    [
+        'name' => 'テスト管理者',
+        'password' => Hash::make('password'),
+        'user_id' => $testUserId, // nullじゃなく整数が入る
+    ]
+);
+}
 }
