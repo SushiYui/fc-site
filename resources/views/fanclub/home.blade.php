@@ -2,10 +2,15 @@
     <div class="space-y-8">
 
         {{-- 1. アーティスト写真 --}}
-        <section id="artist-photos">
-            <figure class="ph">
-                <img class="pc" src="{{ 'images/artist.png' }}" alt="lilac">
-            </figure>
+        <section id="section-hero" class="relative w-full bg-hero-bg">
+        <div class="absolute -top-1/5 -right-1/5 w-[100vh] h-[100vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div>
+            <div class="relative z-10">
+                <div class="relative w-full h-[100vh] bg-cover">
+                    <figure class="relative">
+                        <img class="w-full h-full object-cover" src="{{ 'images/artist.png' }}" alt="lilac">
+                    </figure>
+                </div>
+            </div>
         </section>
 
         {{-- 2. お知らせ --}}
