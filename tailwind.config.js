@@ -14,8 +14,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        suse: ['"SUSE Mono"', 'monospace'],
       },
+    //     sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+    //   },
       colors: {
         'hero-bg': '#002928',
         'hero-blur': '#DDFFA2',

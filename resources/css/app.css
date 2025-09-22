@@ -4,3 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/SUSEMono-Italic-VariableFont_wght.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 100 900; /* Variable font の範囲指定 */
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/SUSEMono-VariableFont_wght') format('truetype');
+  font-style: italic;
+  font-weight: 100 900; /* Variable font の範囲指定 */
+}

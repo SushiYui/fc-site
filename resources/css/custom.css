@@ -1,4 +1,27 @@
 /* resources/css/custom.css */
-body {
-  background-color: red !important;
+.swiper {
+  width: 100%;
+  padding: 20px 0;
 }
+
+.swiper-slide {
+    width: 250px;
+}
+
+.arrow-left,
+.arrow-right {
+  display: inline-block;
+  width: 12px;  /* 矢印のサイズ調整 */
+  height: 12px;
+  border-top: 2px solid #fff;   /* 矢印の色（白） */
+  border-right: 2px solid #fff;
+}
+
+.arrow-left {
+  transform: rotate(-135deg); /* 左向き */
+}
+
+.arrow-right {
+  transform: rotate(45deg); /* 右向き */
+}
+
