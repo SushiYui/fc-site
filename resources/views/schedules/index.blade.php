@@ -1,64 +1,101 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="text-xl font-bold">schedule</h2>  {{-- 1段目 --}}
-  </x-slot>
+        <h2 class="text-xl font-bold">schedule</h2>  {{-- 1段目 --}}
+ </x-slot>
 
-  <div class="py-8 max-w-6xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="py-8 max-w-6xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-    {{-- 2段目：月/年 & ナビゲーション --}}
-    <div class="flex items-center justify-between">
-      <form method="GET" action="{{ route('schedules.index') }}">
-        <button name="month" value="{{ $prevMonth }}" class="text-2xl px-2">←</button>
-      </form>
+        {{-- 2段目：月/年 & ナビゲーション --}}
+        <div class="flex items-center justify-between bg-white p-2 rounded-full">
+            <form method="GET" action="{{ route('schedules.index') }}">
+                <button name="month" value="{{ $prevMonth }}" class="text-2xl px-2">←</button>
+            </form>
 
-      <h3 class="text-lg font-semibold">
-        {{ sprintf('%02d', $currentMonth) }}/{{ $currentYear }}
-      </h3>
+            <h3 class="text-lg font-semibold">
+                {{ sprintf('%02d', $currentMonth) }}/{{ $currentYear }}
+            </h3>
 
-      <form method="GET" action="{{ route('schedules.index') }}">
-        <button name="month" value="{{ $nextMonth }}" class="text-2xl px-2">→</button>
-      </form>
-    </div>
+            <form method="GET" action="{{ route('schedules.index') }}">
+                <button name="month" value="{{ $nextMonth }}" class="text-2xl px-2">→</button>
+            </form>
+        </div>
 
-    {{-- 3段目：カテゴリーの絞り込み --}}
-    <div class="flex flex-wrap gap-2">
-      @foreach($categories as $category)
-        <a href="{{ route('schedules.index', ['category' => $category]) }}"
-           class="px-4 py-1 border rounded bg-gray-100 hover:bg-gray-200 text-sm {{ request('category') === $category ? 'bg-blue-200' : '' }}">
-          {{ ucfirst($category) }}
-        </a>
-      @endforeach
-    </div>
 
-    {{-- 4段目：カレンダー表示 --}}
-    <div class="grid grid-cols-7 gap-2 text-center">
-    <div class="flex text-black text-center py-2">
-        @foreach(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as $day)
-        <div class="flex-1 font-bold">{{ $day }}</div>
-      @endforeach
-    </div>
-    <div class="space-y-2"> {{-- 各週の間に縦の余白 --}}
-    @foreach($calendar as $week)
-        <div class="flex"> {{-- 1週間（7日分）を横並び --}}
-        @foreach($week as $day)
-            <div class="flex-1 border p-2 text-left">
-            <div class="text-xs calendar-day">{{ $day['date']->day }}
-                @if(Auth::user()->admin)
-                <a href="{{ route('schedules.create', ['date' => $day['date']->format('Y-m-d')] ) }}">＋新規投稿</a>
-                @endif
+    <div class="py-[30px] px-[20px] rounded bg-[radial-gradient(ellipse_at_210%_20%,_#A4CE7A_0%,_#A4CE7A_21%,_#002928_93%)]">
+
+            @php
+            $categoryColors = [
+                'live' => 'bg-pink-300 text-pink-900',
+                'radio' => 'bg-green-300 text-green-900',
+                'tv' => 'bg-yellow-300 text-yellow-900',
+                'magazine' => 'bg-purple-300 text-purple-900',
+                'release' => 'bg-indigo-300 text-indigo-900',
+                'other' => 'bg-gray-300 text-gray-900',
+            ];
+            @endphp
+
+            <div class="flex flex-wrap justify-center gap-2 my-2">
+                @foreach($categories as $category)
+                    <a href="{{ route('schedules.index', ['category' => $category]) }}"
+                    class="px-4 py-1 rounded-full text-sm transition
+                    {{ request('category') === $category
+                            ? 'bg-blue-200 text-blue-900'
+                            : ($categoryColors[$category] ?? 'bg-gray-100 text-black') }}">
+                    {{ ucfirst($category) }}
+                    </a>
+                @endforeach
             </div>
-            @foreach($day['schedules'] as $schedule)
-                <div class="mt-1 text-xs">
-                <a href="{{ route('schedules.show', $schedule->id) }}" class="underline">
-                    {{ $schedule->title }}
-                </a>
+
+            {{-- 4段目：カレンダー表示 --}}
+            <div class="grid grid-cols-7 text-center font-bold text-white">
+                @foreach(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as $day)
+                <div class="py-2
+                @if($day === 'Sat') text-blue-400
+                @elseif($day === 'Sun') text-red-400
+                @endif">{{ $day }}</div>
+                @endforeach
+            </div>
+            <div class="bg-[#002928] rounded-[10px]"> {{-- 各週の間に縦の余白 --}}
+            @foreach($calendar as $week)
+                <div class="grid grid-cols-7 border-b border-white/40"> {{-- 1週間（7日分）を横並び --}}
+                @foreach($week as $day)
+                    <div class="p-2 text-left relative text-[#E9FEE1]
+                    {{ $loop->index == 5 ? 'text-blue-500' : '' }}
+                    {{ $loop->index == 6 ? 'text-red-500' : '' }}
+                    {{ $loop->last ? '' : 'border-r' }}
+                    {{ $loop->parent->last ? '' : 'border-b' }}
+                    border-white/40 h-auto">
+
+                    <div class="top-2 right-2 text-xs font-semibold">{{ $day['date']->day }}
+                        @if(Auth::user()->admin)
+                        <a href="{{ route('schedules.create', ['date' => $day['date']->format('Y-m-d')] ) }}"
+                            class="inline-block text-center w-full h-full hover:bg-[#255946] transition border border-black/20 p-1 rounded-full mt-1 text-[#E9FEE1]">
+                            ＋新規投稿</a>
+                        @endif
+                    </div>
+
+                    @foreach($day['schedules'] as $schedule)
+                        <div class="mt-2 text-xs whitespace-normal">
+                        <p class="mb-1">
+                            <a href="{{ route('schedules.show', $schedule->id) }}" class="px-1 rounded-full
+                            {{ $categoryColors[$schedule->category] ?? 'bg-white/10 text-white'}}">
+                            {{ $schedule->category }}
+                            </a>
+                        </p>
+                        <a href="{{ route('schedules.show', $schedule->id) }}" class="">
+                            {{ $schedule->title }}
+                        </a>
+                        </div>
+                    @endforeach
+                    </div>
+                @endforeach
                 </div>
             @endforeach
             </div>
-        @endforeach
-        </div>
-    @endforeach
+
     </div>
+
+
     </div>
   </div>
 </x-app-layout>

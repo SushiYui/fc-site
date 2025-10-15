@@ -1,10 +1,10 @@
 <x-app-layout>
     <div class="space-y-8">
 
-    <section id="top" class="font-suse">
+    <div id="top" class="font-suse">
         {{-- 1. アーティスト写真 --}}
-        <section id="section-hero" class="relative w-full bg-hero-bg">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vh] h-[100vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div>
+    <section id="section-hero" class="relative w-full bg-hero-bg">
+        {{-- <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vh] h-[100vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div> --}}
             <div class="relative z-10">
                 <div class="relative w-full h-[100vh] bg-cover flex items-center justify-center">
                     <figure class="relative max-w-[1324px] w-full px-4">
@@ -12,74 +12,94 @@
                     </figure>
                 </div>
             </div>
-        </section>
+    </section>
+
 
          {{-- 2. ライブ情報 --}}
-        <section id="live-info" class="w-[calc(100%-140px)] mx-auto mb-20">
-        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
-            Live</h2>
-            @if($latestLives->isEmpty())
-            <p class="text-center text-gray-600 mt-8">現在予定されているライブはありません。</p>
-            @if(Auth::user()->admin)
-                <a href="{{ route('lives.create') }}"
-                    class="text-blue-600" hover:underline>
-                    ＋ライブ情報追加
-                </a>
-            @endif
+    <section id="live-info" class="relative w-full bg-hero-bg -mt-[50px]"> {{-- ←ここで背景をつなげる --}}
+     {{-- <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vh] h-[100vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div> --}}
 
-            @else
+        <div class="swiper mySwiper relative mt-5 w-full">
 
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    @foreach($latestLives as $latestLive)
-                        <div class="swiper-slide bg-white rounded-xl shadow p-4">
-                            <a href="{{ route('lives.show', $latestLive->id) }}">
-                                <img src="{{ asset('storage/' . $latestLive->image_path) }}"
-                                    alt="{{ $latestLive->title }}"
-                                    class="w-full h-40 object-cover rounded-lg mb-2">
-                                <h3 class="text-lg font-semibold">{{ $latestLive->title }}</h3>
-                                <p class="text-sm text-gray-500">{{ $latestLive->date }}</p>
-                            </a>
+            <div id="live-info" class="w-[calc(100%-140px)] mx-auto relative">
+
+            {{-- 中央寄せコンテナ --}}
+
+                @if($latestLives->isEmpty())
+                <p class="text-center text-gray-600 mt-8">現在予定されているライブはありません。</p>
+                @if(Auth::user()->admin)
+                    <a href="{{ route('lives.create') }}"
+                        class="text-blue-600" hover:underline>
+                        ＋ライブ情報追加
+                    </a>
+                @endif
+
+                @else
+                {{-- スライダー（上に浮かせる） --}}
+                <div class="swiper mySwiper relative w-full mt-5">
+                    <div class="swiper-wrapper">
+                        @foreach($latestLives as $latestLive)
+                            <div class="swiper-slide p-4 flex justify-between items-center">
+                                <a href="{{ route('lives.show', $latestLive->id) }}" class="block">
+                                    <img src="{{ asset('storage/' . $latestLive->image_path) }}"
+                                        alt="{{ $latestLive->title }}"
+                                        class="w-full h-40 object-cover rounded-lg mb-2">
+                                    <h3 class="text-lg font-semibold text-[#E9FEE1]">{{ $latestLive->title }}</h3>
+                                    <p class="text-sm text-[#64860E]">{{ $latestLive->date }}</p>
+                                </a>
+                            </div>
+                        @endforeach
                         </div>
-                    @endforeach
-                </div>
 
-             {{-- ナビゲーション --}}
-                <div class="relative flex justify-between items-center w-full px-6 mt-4">
-                    <div class="swiper-button-prev flex items-center justify-center w-[35px] h-[35px] rounded-full bg-[#1E4737] cursor-pointer transition duration-300 hover:bg-[#255946]">
-                        <span class="arrow-left"></span>
-                    </div>
-                    <div class="swiper-button-next flex items-center justify-center w-[35px] h-[35px] rounded-full bg-[#1E4737] cursor-pointer transition duration-300 hover:bg-[#255946]">
-                        <span class="arrow-right"></span>
+                </section>
+
+                {{-- ナビゲーション --}}
+                    <div class="relative flex justify-center w-[200px] mx-auto my-10">
+                        <div class="swiper-button-prev flex items-center justify-center w-[35px] h-[35px] rounded-full bg-[#1E4737] cursor-pointer transition duration-300 hover:bg-[#255946]"></div>
+                        <div class="mx-s w-[70px] border-t border-dashed border-[#DDFFA2]-400"></div>
+                        <div class="swiper-button-next flex items-center justify-center w-[35px] h-[35px] rounded-full bg-[#1E4737] cursor-pointer transition duration-300 hover:bg-[#255946]"></div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="mt-6 text-right">
-                <a href="{{ route('lives.index') }}" class="text-blue-600 hover:underline">
-                過去のライブ情報はこちら↗
-                </a>
-            </div>
-            @endif
+                <div class="flex justify-end w-[calc(100%-140px)] mx-auto">
+                    <p class="relative">
+                        <a href="{{ route('lives.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
+                        </a>
+                    </p>
+                    @if(Auth::user()->admin)
+                    <p class="relative">
+                    <a href="{{ route('lives.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        ＋ 新規作成
+                    </a>
+                    </p>
+                    @endif
 
-        </section>
+                </div>
+
+                @endif
+
+    </div>
+
+
+
 
         {{-- 3. お知らせ --}}
-        <section id="infoOfficial" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <section id="infoOfficial" class="w-[calc(100%-140px)] mx-auto my-20">
         <div class="flex justify-between mb-4">
         <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
             News</h2>
                 <div class="mt-4 text-right flex">
                     <p class="relative">
-                        <a href="{{ route('news.index') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center" hover:underline>
-                            MORE
+                        <a href="{{ route('news.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                         </a>
                     </p>
                     @if(Auth::user()->admin)
                     <p class="relative">
                     <a href="{{ route('news.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
-                        ＋新規作成
+                        ＋ 新規作成
                     </a>
                     </p>
                     @endif
@@ -99,6 +119,12 @@
                                 {{-- タイトル --}}
                                 <div>
                                     <p class="text-lg font-bold leading-[1.4em]">{{ $news->title }}</p>
+                                {{-- NEWバッジ --}}
+                                {{-- @if($news->is_new)
+                                    <span class="bg-[#002928] text-white text-[12px] py-[3px] px-[10px] rounded-tr-lg font-semibold">
+                                        NEW
+                                    </span>
+                                @endif --}}
                                 </div>
                             </div>
                         </a>
@@ -106,26 +132,27 @@
                 </ul>
                 @endforeach
             </div>
-
-
         </section>
 
 
         {{-- 4. カレンダー --}}
-        <section id="schedule" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <section id="schedule" class="relative w-full bg-hero-bg py-20 mb-20 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vh] h-[100vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div>
+
+        <div class="relative w-[calc(100%-140px)] mx-auto z-10">
         <div class="flex justify-between mb-4">
-            <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
+            <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#DDFFA2]">
             Schedule</h2>
                 <div class="mt-4 text-right flex">
                     <p class="relative">
-                        <a href="{{ route('schedules.index') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center" hover:underline>
-                            MORE
+                        <a href="{{ route('schedules.index') }}" class="w-full h-full rounded-full text-[#DDFFA2] bg-[#1E4737] px-[1.2em] py-[0.8em] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            MORE<span class="dli-chevron-round-right ml-[0.8em] text-[#DDFFA2]"></span>
                         </a>
                     </p>
                     @if(Auth::user()->admin)
                     <p class="relative">
-                        <a href="{{ route('news.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
-                            ＋新規作成
+                        <a href="{{ route('news.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 no-underline hover:underline inline-block text-center ml-[10px] text-[#DDFFA2] bg-[#1E4737]" hover:underline>
+                            ＋ 新規作成
                         </a>
                     </p>
                     @endif
@@ -137,9 +164,9 @@
                 @php
                     $date = \Carbon\Carbon::parse($schedule->date);
                 @endphp
-                <li class="border rounded p-4 shadow">
-                    <a href="{{ route('schedules.show' , $schedule->id) }}">
-                        <p class="text-sm text-gray-500">
+                <li class="items-center">
+                    <a href="{{ route('schedules.show' , $schedule->id) }}" class="inline-block p-4 w-full h-full rounded text-[#E9FEE1] bg-[#1E4737]">
+                        <p class="text-sm">
                             <span>{{ $date->format('Y') }}</span>
                             <span>{{ $date->format('m') }}</span>
                             <span>{{ $date->format('d') }}</span>
@@ -151,95 +178,176 @@
                 </li>
                 @endforeach
             </ul>
-        </section>
-
-        {{-- 5. ブログ --}}
-        <section id="blog" class="w-[calc(100%-140px)] mx-auto mb-20">
-        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
-            Blog</h2>
-        <div class="mt-4 text-right flex">
-            <p class="relative">
-                        <a href="{{ route('blogs.index') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center" hover:underline>
-                            MORE
-                        </a>
-                    </p>
-                    @if(Auth::user()->admin)
-                    <p class="relative">
-                    <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
-                    ＋新規作成
-                     </a>
-                </p>
-            @endif
         </div>
-
-            <div class="flex flex-wrap justify-center gap-6">
-                @foreach($latestBlogs as $blogs)
-                <div class="w-full sm:w-[48%] lg:w-[30%] bg-white rounded-xl shadow overflow-hidden">
-                    <a href="{{ route('blogs.show' , $blogs->id) }}">
-                        <div class="h-48 w-full overflow-hidden">
-                            <img src="{{ asset('storage/' . $blogs->image_path) }}" alt="{{ $blogs->title }}" class="w-full h-full object-cover">
-                        </div>
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold">{{ $blogs->title }}</h3>
-                        <p class="text-sm text-gray-500">{{ $blogs->date }}</p>
-                    </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-
-            <div class="mt-4 text-right">
-                <a href="{{ route('blogs.index') }}" class="text-blue-600" hover:underline>
-                    過去のブログはこちら↗
-                </a>
-                @if(Auth::user()->admin)
-                <a href="{{ route('blogs.create') }}" class="text-blue-600" hover:underline>
-                    新規作成
-                </a>
-                @endif
-            </div>
-        </section>
-
-        {{-- 6. ストーリー --}}
-        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20">
-        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
-            Story</h2>
         </section>
 
         {{-- 7. MV一覧 --}}
         <section id="mv" class="w-[calc(100%-140px)] mx-auto mb-20">
         <div class="flex justify-between mb-4">
 
-            <h2 class="text-2xl font-medium leading-none text-[clamp(20px,7vw,30px)]">
-                MV</h2>
+            <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
+                Video</h2>
+
+                <div class="mt-4 text-right flex">
+                    <p class="relative">
+                        {{-- <a href="{{ route('mv.index') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center" hover:underline> --}}
+                        <a href="{{ route('mv.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
+                        </a>
+                        </p>
+                    @if(Auth::user()->admin)
+                    <p class="relative">
+                        <a href="{{ route('mv.create') }}"
+                            class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                            ＋ MV追加
+                        </a>
+                    </p>
+                    @endif
+                </div>
+        </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach ($latestMVs as $mv)
-                    <div class="bg-white shadow rounded p-4">
+                    <div class="p-4">
                     <iframe width="100%" height="215"
                             src="{{ $mv->url }}" frameborder="0"
                             allowfullscreen></iframe>
-                    <p class="mt-2 font-semibold">{{ $mv->title }}</p>
+                    <p class="mt-2 text-sm text-[#64860E]">{{ $mv->category }}</p>
+                    <p class="font-bold text-[#002928] text-[18px]">{{ $mv->title }}</p>
+                        <p class="text-xs text-[#64860E]">
+                            <span>{{ $date->format('Y') }}</span>
+                            <span>{{ $date->format('m') }}</span>
+                            <span>{{ $date->format('d') }}</span>
+                            ({{ strtoupper($date->format('D')) }})
+                        </p>
                     </div>
                 @endforeach
                 </div>
 
-            <div class="mt-4 text-right">
-            <a href="{{ route('mv.index') }}" class="text-indigo-600 hover:underline">MV一覧はこちら</a>
-            </div>
-             @if(Auth::user()->admin)
-                <a href="{{ route('mv.create') }}"
-                    class="text-blue-600" hover:underline>
-                    ＋MV追加
-                </a>
-            @endif
-
         </section>
+
+
+     <div class="relative w-full bg-[#DDFFA2] py-20 mb-20 overflow-hidden">
+        {{-- 6. 新規入会--}}
+        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
+        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
+            Fan Club</h2>
+                <div class="flex justify-center mb-6">
+                    <img src="/images/fc_site_logo.png" alt="Fan Club Logo" class="w-40 h-auto">
+                </div>
+                <ul class="mt-4 text-center flex justify-center">
+                    <li><a href="" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
+                        新規入会<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
+                    <li><a href="" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
+                        LOGIN<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
+                </ul>
+        </section>
+
+
+        {{-- 6. ストーリー --}}
+        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
+        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
+            Story</h2>
+        </section>
+
+
+        {{-- JAM'S New Contents --}}
+        <div class="relative py-[40px]">
+        <h2 class="w-[calc(100%-140px)] mx-auto mb-5 font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
+            JAM'S New Contents</h2>
+
+        {{-- 7-1. MOVIE --}}
+        <section id="MOVIE" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <div class="flex justify-between mb-4">
+            <h2 class="font-suse font-medium leading-none text-[clamp(20px] text-[#64860E]">
+                Mrs.MOVIE</h2>
+            <div class="mt-4 text-right flex">
+                <p class="relative">
+                            <a href="" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                                MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
+                            </a>
+                        </p>
+                        @if(Auth::user()->admin)
+                        <p class="relative">
+                        <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        ＋ 新規作成
+                        </a>
+                    </p>
+                @endif
+            </div>
+
+        </div>
+        </section>
+
+        {{-- 7-2. ブログ--}}
+        <section id="blog" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <div class="flex justify-between mb-4">
+            <h2 class="font-suse font-medium leading-none text-[20px] text-[#64860E]">
+                Blog</h2>
+            <div class="mt-4 text-right flex">
+                <p class="relative">
+                            <a href="{{ route('blogs.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                                MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
+                            </a>
+                        </p>
+                        @if(Auth::user()->admin)
+                        <p class="relative">
+                        <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        ＋ 新規作成
+                        </a>
+                    </p>
+                @endif
+            </div>
+        </div>
+
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="w-full sm:w-[48%] lg:w-[30%] bg-white rounded-xl shadow overflow-hidden">
+                    <a href="{{ route('blogs.show' , $latestBlog->id) }}">
+                        <div class="h-48 w-full overflow-hidden">
+                            <img src="{{ asset('storage/' . $latestBlog->image_path) }}" alt="{{ $latestBlog->title }}" class="w-full h-full object-cover">
+                        </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">{{ $latestBlog->title }}</h3>
+                        <p class="text-sm text-gray-500">{{ $latestBlog->date }}</p>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- 7-3. GALLERY --}}
+        <section id="GALLERY" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <div class="flex justify-between mb-4">
+            <h2 class="font-suse font-medium leading-none text-[20px] text-[#64860E]">
+                Mrs. GALLERY</h2>
+            <div class="mt-4 text-right flex">
+                <p class="relative">
+                            <a href="" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                                MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
+                            </a>
+                        </p>
+                        @if(Auth::user()->admin)
+                        <p class="relative">
+                        <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        ＋ 新規作成
+                        </a>
+                    </p>
+                @endif
+            </div>
+
+
+        </div>
+        </section>
+
+        </div>
+
 
         {{-- 8. お問い合わせ --}}
-        <section id="contact" class="w-[calc(100%-140px)] mx-auto mb-20">
-        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)]">
+        <section id="contact" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
+        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
             Contact</h2>
         </section>
+    </div>
 
     </section>
     </div>

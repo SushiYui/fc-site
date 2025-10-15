@@ -8,20 +8,41 @@
     width: 250px;
 }
 
-.arrow-left,
-.arrow-right {
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 14px !important; /* 矢印を小さく */
+    color: #DDFFA2; /* 落ち着いた色 */
+}
+
+.dli-chevron-round-right {
   display: inline-block;
-  width: 12px;  /* 矢印のサイズ調整 */
-  height: 12px;
-  border-top: 2px solid #fff;   /* 矢印の色（白） */
-  border-right: 2px solid #fff;
+  vertical-align: middle;
+  color: #DDFFA2;
+  line-height: 1;
+  position: relative;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-25%) rotate(45deg);
 }
 
-.arrow-left {
-  transform: rotate(-135deg); /* 左向き */
+.dli-chevron-round-right::before, .dli-chevron-round-right::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 0.1em;
 }
 
-.arrow-right {
-  transform: rotate(45deg); /* 右向き */
+.dli-chevron-round-right::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.1em;
+}
+
+.dli-chevron-round-right::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0.1em;
 }
 

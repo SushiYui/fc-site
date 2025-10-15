@@ -20,9 +20,9 @@ class FanclubController extends Controller
         $latestLives = Live::latest('date')->take(3)->get();
         $latestMVs = MV::orderBy('created_at', 'desc')->take(2)->get();
         $latestSchedules = Schedule::orderBy('date', 'desc')->take(3)->get();
-        $latestBlogs = Blog::orderBy('created_at', 'desc')->take(3)->get();
-
-        return view('fanclub.home', compact('latestNews','latestLives', 'latestMVs', 'latestSchedules', 'latestBlogs'));
+        $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+        // dd($latestLives);
+        return view('fanclub.home', compact('latestNews','latestLives', 'latestMVs', 'latestSchedules', 'latestBlog'));
     }
 
 }
