@@ -1,6 +1,6 @@
 <x-app-layout>
   <x-slot name="header">
-        <h2 class="text-xl font-bold">schedule</h2>  {{-- 1段目 --}}
+        <h2 class="text-[40px] font-normal">schedule</h2>  {{-- 1段目 --}}
  </x-slot>
 
         <div class="py-8 max-w-6xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -12,7 +12,7 @@
             </form>
 
             <h3 class="text-lg font-semibold">
-                {{ sprintf('%02d', $currentMonth) }}/{{ $currentYear }}
+                {{ $currentYear }}.{{ sprintf('%02d', $currentMonth) }}
             </h3>
 
             <form method="GET" action="{{ route('schedules.index') }}">
@@ -35,6 +35,15 @@
             @endphp
 
             <div class="flex flex-wrap justify-center gap-2 my-2">
+            {{-- ALLボタン --}}
+            <a href="{{ route('schedules.index') }}"
+            class="px-4 py-1 rounded-full text-sm transition
+                    {{ request('category') === $category
+                ? 'bg-red-200 text-red-900'
+                : ($categoryColors[$category] ?? 'bg-gray-100 text-black') }}">All
+            </a>
+
+            {{-- 各カテゴリー --}}
                 @foreach($categories as $category)
                     <a href="{{ route('schedules.index', ['category' => $category]) }}"
                     class="px-4 py-1 rounded-full text-sm transition

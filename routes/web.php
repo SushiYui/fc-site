@@ -7,6 +7,7 @@ use App\Http\Controllers\Main\MVController;
 use App\Http\Controllers\Main\ScheduleController;
 use App\Http\Controllers\Main\BlogController;
 use App\Http\Controllers\Main\BlogLikeController;
+use App\Http\Controllers\Main\MovieController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Main\FanclubController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,20 @@ Route::prefix('admin')->group(function () {
     Route::put('/blogs/{id}', [BlogController::class, 'update'])->name('blogs.update');
     Route::delete('/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 
+    // movie
+    Route::get('/movie/create', [MovieController::class, 'create'])->name('movies.create');
+    Route::post('/movie', [MovieController::class, 'store'])->name('movies.store');
+    Route::get('/movie/{id}/edit', [MovieController::class, 'edit'])->name('movies.edit');
+    Route::put('/movie/{id}', [MovieController::class, 'update'])->name('movies.update');
+    Route::delete('/movie/{id}', [MovieController::class, 'destroy'])->name('movies.destroy');
+
+    // gallery
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
 });
 
 // ファンクラブページへ遷移
@@ -82,6 +97,14 @@ Route::middleware('auth')->group(function () {
     // 一般会員向け：ブログ
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
     Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
+
+    // 一般会員向け：movie
+    Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
+    Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
+
+    // 一般会員向け：movie
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

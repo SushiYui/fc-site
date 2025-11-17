@@ -108,9 +108,12 @@
             {{-- 直近3つ＋過去リンク --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach($latestNews as $news)
-                <ul class="border rounded p-4 shadow">
+                <ul class="border rounded shadow">
                     <li class="relative  -translate-x-0 -translate-y-0">
-                        <a href="{{ route('news.show' , $news->id) }}" class="relative block w-full rounded-full bg-[#F5F5F5] h-full px-5 py-3 border-black/20 overflow-hidden">
+                        <a href="{{ route('news.show' , $news->id) }}"
+                            class="relative block w-full rounded-[10px]l bg-[#F5F5F5] h-full px-5 py-3 border-black/20 overflow-hidden
+                            @if($news->published_at->gt(now()->subWeek())) has-new @endif">
+                            {{-- ↑１週間以内の投稿に「NEW」をつける！ --}}
                             <div class="flex h-full items-center">
                                 {{-- 日付 --}}
                                 <div class="bg-[#8E77F5] w-[50px] h-[50px] rounded-full flex items-center justify-center mr-7">
@@ -119,12 +122,6 @@
                                 {{-- タイトル --}}
                                 <div>
                                     <p class="text-lg font-bold leading-[1.4em]">{{ $news->title }}</p>
-                                {{-- NEWバッジ --}}
-                                {{-- @if($news->is_new)
-                                    <span class="bg-[#002928] text-white text-[12px] py-[3px] px-[10px] rounded-tr-lg font-semibold">
-                                        NEW
-                                    </span>
-                                @endif --}}
                                 </div>
                             </div>
                         </a>
@@ -245,9 +242,48 @@
 
 
         {{-- 6. ストーリー --}}
-        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
-        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
+        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20 pt-[40px] pb-[50px]">
+        <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928] mb-[20px]">
             Story</h2>
+
+            <div class="text-center">
+                <ul class="inline-flex p-[3%] bg-white/30 backdrop-blur-[20px] rounded-[200px] border border-white">
+                    {{-- Mrs.MOMENTひとつめ --}}
+                    <li class="mr-[1vw] ml-0 relative ">
+                     <a href="#">
+                        <div class="w-[18vw] h-[18vw] max-w-[120px] max-h-[120px] relative flex justify-center items-center rounded-full bg-white mb-[0.25em] overflow-hidden">
+                            <img src="/images/vocal_icon.png" alt="20251115vocal.png" class="w-full h-full object-cover">
+                        </div>
+                     </a>
+                    </li>
+                    {{-- Mrs.MOMENTふたつめ --}}
+                    <li class="mr-[1vw] ml-0 relative ">
+                     <a href="#">
+                        <div class="w-[18vw] h-[18vw] max-w-[120px] max-h-[120px] relative flex justify-center items-center rounded-full bg-white mb-[0.25em] overflow-hidden">
+                            <img src="/images/vocal_icon.png" alt="20251115vocal.png" class="w-full h-full object-cover">
+                        </div>
+                     </a>
+                    </li>
+                    {{-- Mrs.MOMENTみっつめ --}}
+                    <li class="mr-[1vw] ml-0 relative ">
+                     <a href="#">
+                        <div class="w-[18vw] h-[18vw] max-w-[120px] max-h-[120px] relative flex justify-center items-center rounded-full bg-white mb-[0.25em] overflow-hidden">
+                            <img src="/images/vocal_icon.png" alt="20251115vocal.png" class="w-full h-full object-cover">
+                        </div>
+                     </a>
+                    </li>
+                    {{-- Mrs.MOMENTよっつめ --}}
+                    <li class="ml-0 relative ">
+                     <a href="#">
+                        <div class="w-[18vw] h-[18vw] max-w-[120px] max-h-[120px] relative flex justify-center items-center rounded-full bg-white mb-[0.25em] overflow-hidden">
+                            <img src="/images/vocal_icon.png" alt="20251115vocal.png" class="w-full h-full object-cover">
+                        </div>
+                     </a>
+                    </li>
+
+                </ul>
+            </div>
+
         </section>
 
 
@@ -263,19 +299,37 @@
                 Mrs.MOVIE</h2>
             <div class="mt-4 text-right flex">
                 <p class="relative">
-                            <a href="" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            <a href="{{ route('movies.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
                                 MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                             </a>
                         </p>
                         @if(Auth::user()->admin)
                         <p class="relative">
-                        <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        <a href="{{ route('movies.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
                         ＋ 新規作成
                         </a>
                     </p>
                 @endif
             </div>
+        </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @foreach ($latestMovies as $movie)
+                    <div class="p-4">
+                    <iframe width="100%" height="215"
+                            src="{{ $movie->url }}" frameborder="0"
+                            allowfullscreen></iframe>
+                    <p class="font-bold text-[#002928] text-[18px]">{{ $movie->title }}</p>
+                        <p class="text-xs text-[#64860E]">
+                            <span>{{ $date->format('Y') }}</span>
+                            <span>{{ $date->format('m') }}</span>
+                            <span>{{ $date->format('d') }}</span>
+                            ({{ strtoupper($date->format('D')) }})
+                        </p>
+                    <p @if($date->gt(now()->subWeek())) has-new @endif></p>
+                    </div>
+                @endforeach
+                </div>
         </div>
         </section>
 
@@ -328,7 +382,7 @@
                         </p>
                         @if(Auth::user()->admin)
                         <p class="relative">
-                        <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                        <a href="{{ route('gallery.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
                         ＋ 新規作成
                         </a>
                     </p>

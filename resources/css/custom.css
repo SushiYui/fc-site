@@ -46,3 +46,17 @@
   width: 0.1em;
 }
 
+/* Newsページ */
+/* 1週間以内に公開されたニュースだけに「New」を出したい */
+.has-new::after{
+    content: "New";
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: #002928;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight:600;
+    padding:3px 10px;
+    border-radius:0 8px 0 0;
+}

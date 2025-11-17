@@ -8,6 +8,8 @@ use App\Models\Live;
 use App\Models\MV;
 use App\Models\Schedule;
 use App\Models\Blog;
+use App\Models\Movie;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,8 +23,10 @@ class FanclubController extends Controller
         $latestMVs = MV::orderBy('created_at', 'desc')->take(2)->get();
         $latestSchedules = Schedule::orderBy('date', 'desc')->take(3)->get();
         $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+        $latestMovies = Movie::orderBy('created_at', 'desc')->take(4)->get();
+        $latestGalleys = gallery::orderBy('created_at', 'desc')->first();
         // dd($latestLives);
-        return view('fanclub.home', compact('latestNews','latestLives', 'latestMVs', 'latestSchedules', 'latestBlog'));
+        return view('fanclub.home', compact('latestNews','latestLives', 'latestMVs', 'latestSchedules', 'latestBlog','latestMovies', 'latestGalleys'));
     }
 
 }
