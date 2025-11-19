@@ -337,7 +337,7 @@
         <section id="blog" class="w-[calc(100%-140px)] mx-auto mb-20">
         <div class="flex justify-between mb-4">
             <h2 class="font-suse font-medium leading-none text-[20px] text-[#64860E]">
-                Blog</h2>
+                Mrs.REPORT</h2>
             <div class="mt-4 text-right flex">
                 <p class="relative">
                             <a href="{{ route('blogs.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
@@ -376,7 +376,7 @@
                 Mrs. GALLERY</h2>
             <div class="mt-4 text-right flex">
                 <p class="relative">
-                            <a href="" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+                            <a href="{{ route('gallery.index') }}" class="w-full h-full rounded-full border border-black/20 px-[1.2em] py-[0.8em] text-[#002928] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
                                 MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                             </a>
                         </p>
@@ -388,9 +388,18 @@
                     </p>
                 @endif
             </div>
-
-
         </div>
+
+        <div class="flex flex-wrap justify-center gap-6">
+            <div class="w-full sm:w-[48%] lg:w-[30%] bg-white rounded-xl shadow overflow-hidden">
+                <a href="{{ route('gallery.show' , $latestGalleys->id) }}">
+                    <div class="h-48 w-full overflow-hidden">
+                        <img src="{{ asset('storage/' . $latestGalleys->image_path) }}" alt="うさぎ写真館" class="w-full h-full object-cover">
+                    </div>
+                </a>
+            </div>
+        </div>
+
         </section>
 
         </div>

@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
     //
     public function index()
     {
-        $gallery = Gallery::orderBy('released_at', 'desc')->paginate(6);
-        return view('gallery.index' ,compact('galley'));
+        $gallerys = Gallery::orderBy('created_at', 'desc')->paginate(6);
+        return view('gallery.index' ,compact('gallerys'));
 
     }
 
@@ -31,6 +33,10 @@ class GalleryController extends Controller
         $path = $request->file('image')->store('galleys', 'public');
         $validated['image_path'] = $path;
         }
+
+        Gallery::create($validated);
+        return redirect()->route('fanclub.home')->with('success', '投稿完了！');
+
     }
 
     public function show($id){

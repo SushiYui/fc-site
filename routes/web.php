@@ -8,6 +8,7 @@ use App\Http\Controllers\Main\ScheduleController;
 use App\Http\Controllers\Main\BlogController;
 use App\Http\Controllers\Main\BlogLikeController;
 use App\Http\Controllers\Main\MovieController;
+use App\Http\Controllers\Main\GalleryController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Main\FanclubController;
 use Illuminate\Support\Facades\Route;

@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            Gallery
+            うさぎ写真館Vol.
         </h2>
     </x-slot>
 
@@ -16,31 +16,19 @@
                     </div>
                 @endif
 
-            <div class="flex flex-wrap gap-2">
-                @foreach($categories as $category)
-                    <a href="{{ route('blogs.index', ['category' => $category]) }}"
-                    class="px-4 py-1 border rounded bg-gray-100 hover:bg-gray-200 text-sm {{ request('category') === $category ? 'bg-blue-200' : '' }}">
-                    {{ $categoryMap[$category] }}
-                    </a>
-                @endforeach
-            </div>
-
-
-                @foreach($blogs as $blog)
+                @foreach($gallerys as $gallery)
                     <div class="mb-8 border-b pb-4">
                         {{-- 画像 --}}
-                        @if($blog->image_path)
-                            <img src="{{ asset('storage/' . $blog->image_path) }}" alt="ブログ画像" class="w-full max-w-md mb-4 rounded-xl">
-                        @endif
+                        <img src="{{ asset('storage/' . $gallery->image_path) }}" alt="うさぎ画像" class="w-full max-w-md mb-4 rounded-xl">
                         {{-- 投稿日 --}}
-                        <p class="text-sm text-gray-500">{{ $blog->created_at->format('Y年m月d日') }}</p>
+                        <p class="text-sm text-gray-500">{{ $gallery->created_at->format('Y年m月d日') }}</p>
 
                     </div>
                 @endforeach
 
                 {{-- ページネーション --}}
                 <div class="mt-6">
-                    {{ $blogs->links() }}
+                    {{ $gallerys->links() }}
                 </div>
 
             </div>

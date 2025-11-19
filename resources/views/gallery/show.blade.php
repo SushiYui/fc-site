@@ -2,37 +2,22 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold text-gray-800 leading-tight">
-            ブログ詳細
+            うさぎ写真館Vol.
         </h2>
     </x-slot>
 
     <div class="max-w-2xl mx-auto py-8">
         {{-- 表示モード --}}
         <div id="view-mode" class="space-y-4">
-            <h3 class="text-2xl font-bold">{{ $blogItem->title }}</h3>
-            <p class="text-gray-600">{{ $blogItem->body }}</p>
-            @if ($blogItem->image_path)
-                <img src="{{ asset('storage/' . $blogItem->image_path) }}" alt="ブログ画像" class="w-full max-w-md">
+            @if ($galleryItem->image_path)
+                <img src="{{ asset('storage/' . $galleryItem->image_path) }}" alt="うさぎ写真" class="w-full max-w-md">
             @endif
         </div>
 
         {{-- 編集モード（初期は非表示） --}}
-        <form id="edit-form" action="{{ route('blogs.update', ['id' => $blogItem->id]) }}" method="POST" enctype="multipart/form-data" class="space-y-4 hidden">
+        <form id="edit-form" action="{{ route('gallery.update', ['id' => $galleryItem->id]) }}" method="POST" enctype="multipart/form-data" class="space-y-4 hidden">
             @csrf
             @method('PUT')
-
-            <div>
-                <label for="blog_title" class="block text-sm font-medium text-gray-700">タイトル</label>
-                <input type="text" name="blog_title" id="blog_title" value="{{ $blogItem->title }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-            </div>
-
-            <div>
-                <label for="blog_body" class="block text-sm font-medium text-gray-700">本文</label>
-                <textarea name="blog_body" id="blog_body" rows="5"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ $blogItem->body }}</textarea>
-            </div>
-
             <div>
                 <label for="image_path" class="block text-sm font-medium text-gray-700">画像</label>
                 <input type="file" name="image_path" id="image_path"
@@ -65,7 +50,7 @@
                     編集
                 </button>
 
-                <form action="{{ route('blogs.destroy', ['id' => $blogItem->id]) }}" method="POST" class="inline">
+                <form action="{{ route('gallery.destroy', ['id' => $galleryItem->id]) }}" method="POST" class="inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
