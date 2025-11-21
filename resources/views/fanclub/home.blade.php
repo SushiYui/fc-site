@@ -321,10 +321,10 @@
                             allowfullscreen></iframe>
                     <p class="font-bold text-[#002928] text-[18px]">{{ $movie->title }}</p>
                         <p class="text-xs text-[#64860E]">
-                            <span>{{ $date->format('Y') }}</span>
-                            <span>{{ $date->format('m') }}</span>
-                            <span>{{ $date->format('d') }}</span>
-                            ({{ strtoupper($date->format('D')) }})
+                            <span>{{ $movie->released_at->format('Y') }}</span>
+                            <span>{{ $movie->released_at->format('m') }}</span>
+                            <span>{{ $movie->released_at->format('d') }}</span>
+                            ({{ strtoupper($movie->released_at->format('D')) }})
                         </p>
                     <p @if($date->gt(now()->subWeek())) has-new @endif></p>
                     </div>

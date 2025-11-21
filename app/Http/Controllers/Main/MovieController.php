@@ -22,11 +22,16 @@ class MovieController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'url' => 'required|url|max:255',
             'released_at' => 'required|date|before_or_equal:today',
+            'video' => 'required|file|mimetypes:video/mp4,video/quicktime,video/x-msvideo',
         ]);
+
+        $path = $request->file('video')->store('public/movies');
+
+        $validated['video_path'] = $path;
 
         Movie::create($validated);
         return redirect()->route('fanclub.home')->with('success', '投稿完了！');

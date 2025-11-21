@@ -9,6 +9,11 @@ class Movie extends Model
     protected $table = 'movies';
 
     protected $fillable = [
-        'title', 'url', 'released_at'
+        'title', 'video_path', 'released_at'
     ];
+
+    protected $casts = [
+        'released_at' => 'datetime',
+    ];
+
 }

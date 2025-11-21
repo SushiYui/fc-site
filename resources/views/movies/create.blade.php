@@ -6,8 +6,8 @@
   </x-slot>
 
   <div class="py-8 max-w-3xl mx-auto sm:px-6 lg:px-8">
-    <form action="{{ route('movies.store') }}" method="POST">
-      @csrf
+    <form action="{{ route('movies.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
       <div class="mb-4">
         <label for="title" class="block text-sm font-medium">タイトル</label>
@@ -16,10 +16,10 @@
       </div>
 
       <div class="mb-4">
-        <label for="url" class="block text-sm font-medium">動画URL</label>
-        <input type="text" name="url" id="url" value="{{ old('url') }}" required
+        <label for="video" class="block text-sm font-medium">動画ファイル</label>
+        <input type="file" name="video" id="video" accept="video/*" required
                class="mt-1 block w-full border rounded p-2">
-        <p class="text-sm text-gray-500 mt-1">例：https://www.youtube.com/embed/XXXXXXXX</p>
+        <p class="text-sm text-gray-500 mt-1">>動画ファイル（mp4など）を選択してください</p>
       </div>
 
       <div class="mb-4">
