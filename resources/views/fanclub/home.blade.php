@@ -293,7 +293,7 @@
             JAM'S New Contents</h2>
 
         {{-- 7-1. MOVIE --}}
-        <section id="MOVIE" class="w-[calc(100%-140px)] mx-auto mb-20">
+        <section id="MOVIE" class="w-[calc(100%-140px)] mx-auto mb-10">
         <div class="flex justify-between mb-4">
             <h2 class="font-suse font-medium leading-none text-[clamp(20px] text-[#64860E]">
                 Mrs.MOVIE</h2>
@@ -313,7 +313,7 @@
             </div>
         </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach ($latestMovies as $movie)
                     <div class="p-4">
                     <iframe width="100%" height="215"
@@ -329,7 +329,7 @@
                     <p @if($date->gt(now()->subWeek())) has-new @endif></p>
                     </div>
                 @endforeach
-                </div>
+            </div>
         </div>
         </section>
 

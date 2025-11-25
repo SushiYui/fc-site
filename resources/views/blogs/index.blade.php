@@ -1,7 +1,7 @@
 {{-- resources/views/blogs/index.blade.php --}}
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="text-xl font-semibold leading-tight text-gray-800">
+        <h1 class="report-title font-semibold leading-tight text-gray-800">
             Mrs.REPORT
         </h1>
     </x-slot>
@@ -15,46 +15,50 @@
                 </div>
             @endif
 
-            {{--カテゴリー--}}
+            {{-- カテゴリー --}}
             <div class="flex flex-wrap justify-center gap-2 my-2">
                 {{-- ALLボタン --}}
                 <a href="{{ route('blogs.index') }}"
-                    class="px-4 py-1 rounded-full text-sm transition
-                    {{ request('category') ? $categoryColors['all'] : 'bg-red-200 text-red-900' }}">
-                     All</a>
+                    class="px-[2.5em] py-[1em] rounded-full text-[12px] transition border border-[rgba(221,255,162,0.8)]
+                    {{ request('category') ? 'bg-[#DDFFA2] text-[#1E4737]' : 'bg-[#1E4737] text-[#DDFFA2]' }}">
+                    All
+                </a>
 
                 {{-- 各カテゴリーボタン --}}
                 @foreach ($categories as $category)
                     <a href="{{ route('blogs.index', ['category' => $category]) }}"
-                        class="px-4 py-1 border rounded bg-gray-100 hover:bg-gray-200 text-sm {{ request('category') === $category ? 'bg-blue-200' : '' }}">
+                        class="px-[2.5em] py-[1em] rounded-full text-[12px] transition border border-[rgba(221,255,162,0.8)]
+                        {{ request('category') === $category
+                            ? // 選択中かそうでないかで文字色や背景色が変わる
+                            'bg-[#1E4737] text-[#DDFFA2]'
+                            : 'bg-[#DDFFA2] text-[#1E4737]' }}">
                         {{ $categoryMap[$category] }}
                     </a>
                 @endforeach
             </div>
 
-
             {{-- ブログ記事一覧 --}}
+            <div class=""></div>
             @foreach ($blogs as $blog)
-                <div class="bg-white overflow-hidden sm:rounded-lg px-6 mb-4">
+                <ul class="w-full mb-5">
 
-                    <div class="pb-4">
-                        {{-- 画像 --}}
-                        @if ($blog->image_path)
-                            <img src="{{ asset('storage/' . $blog->image_path) }}" alt="ブログ画像"
-                                class="w-full max-w-md mb-4 rounded-xl">
-                        @endif
-
-                        {{-- タイトル --}}
-                        <h3 class="text-2xl font-bold text-gray-900">{{ $blog->title }}</h3>
-
-                        {{-- 投稿日 --}}
-                        <p class="text-sm text-gray-500">{{ $blog->created_at->format('Y年m月d日') }}</p>
-
-                        {{-- 詳細ページリンク --}}
+                    <li class="mb-[20px]">
+                    {{-- 詳細ページリンク --}}
                         <a href="{{ route('blogs.show', $blog->id) }}"
-                            class="inline-block mt-2 text-blue-500 hover:underline">
-                            続きを読む
-                        </a>
+                            class="block relative p-5 bg-[#1f916acc] text-[#002928] rounded-lg hover:bg-[#1f916a] transition">
+
+                            {{-- 画像 --}}
+                            @if ($blog->image_path)
+                                <img src="{{ asset('storage/' . $blog->image_path) }}" alt="ブログ画像"
+                                    class="w-full max-w-md mb-4 rounded-xl">
+                            @endif
+
+                            {{-- タイトル --}}
+                            <h3 class="text-[14px] font-bold text-white mt-[1em] mb-[0.8em]">{{ $blog->title }}</h3>
+
+                            {{-- 投稿日 --}}
+                            <p class="text-[11px] font-bold text-[#DDFFA2]">{{ $blog->created_at->format('Y年m月d日') }}</p>
+
 
                         {{-- いいね機能 --}}
                         @if (Auth::check() && Auth::user()->hasLiked($blog->id))
@@ -70,8 +74,9 @@
                                 <span class="like_counts{{ $blog->id }}">{{ $blog->likes->count() }}</span>
                             </p>
                         @endif
-                    </div>
-                </div>
+                        </a>
+                    </li>
+                </ul>
             @endforeach
 
             {{-- ページネーション --}}

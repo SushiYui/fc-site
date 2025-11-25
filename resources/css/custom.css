@@ -60,3 +60,20 @@
     padding:3px 10px;
     border-radius:0 8px 0 0;
 }
+
+
+/* Mrs.REPORTページ */
+/* タイトルデザイン */
+.report-title {
+    -webkit-text-stroke: 0.5px #c7ae41;
+    position: relative;
+    display: inline-block;
+    font-weight: 400; /* font-weight: font-weight; は誤りだから修正 */
+    font-style: normal;
+    font-size: clamp(20px, 9vw, 40px);
+
+    /* ▼ グラデーション文字を実現する部分 ▼ */
+    background: linear-gradient(to bottom, #fffbf3, #fff386, #f0d352);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
