@@ -1,6 +1,7 @@
 {{-- resources/views/blogs/show.blade.php --}}
-<x-app-layout>
-    <x-slot name="header">
+@extends('layouts.app')
+
+@section('content')    <x-slot name="header">
         <h2 class="text-xl font-semibold text-gray-800 leading-tight">
             うさぎ写真館Vol.
         </h2>
@@ -82,4 +83,4 @@
             });
         });
     </script>
-</x-app-layout>
+@endsection

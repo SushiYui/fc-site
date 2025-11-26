@@ -1,6 +1,7 @@
 {{-- resources/views/blogs/create.blade.php --}}
-<x-app-layout>
-    <x-slot name="header">
+@extends('layouts.app')
+
+@section('content')    <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             うさぎ写真館
         </h2>
@@ -30,4 +31,4 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+@endsection

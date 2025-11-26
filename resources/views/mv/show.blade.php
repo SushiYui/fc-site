@@ -1,5 +1,6 @@
-<x-app-layout>
-  <x-slot name="header">
+@extends('layouts.app')
+
+@section('content')  <x-slot name="header">
     <h2 class="text-xl font-semibold text-gray-800 leading-tight">
       MV詳細
     </h2>
@@ -20,4 +21,4 @@
       <a href="{{ route('mvs.index') }}" class="text-indigo-600 hover:underline">← MV一覧へ戻る</a>
     </div>
   </div>
-</x-app-layout>
+@endsection

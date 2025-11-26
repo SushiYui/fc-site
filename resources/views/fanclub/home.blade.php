@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="space-y-8">
 
     <div id="top" class="font-suse">
@@ -414,4 +416,4 @@
 
     </section>
     </div>
-</x-app-layout>
+@endsection

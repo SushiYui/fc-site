@@ -1,13 +1,15 @@
 {{-- resources/views/blogs/index.blade.php --}}
-<x-app-layout>
-    <x-slot name="header">
-        <h1 class="report-title font-semibold leading-tight text-gray-800">
-            Mrs.REPORT
-        </h1>
-    </x-slot>
+@extends('layouts.app', ['navColor' => 'bg-[#d6efa0]'])
+@section('content')
+<div class="relative bg-[#72c32fcc] pb-5">
+    <div class="absolute w-[50vw] h-[50vw] right-0 top-0 rounded-[800px] bg-[#BCE670] opacity-80 blur-[60px] z-0"></div>
+    <div class="absolute w-[50vw] h-[50vw] left-0 top-[10vw] rounded-[800px] bg-[#A4CE7A] opacity-80 blur-[60px] z-0"></div>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="relative z-20 max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+        <h1 class="report-title font-semibold leading-tight text-gray-800 my-5">
+            Mrs.REPORT</h1>
+
 
             @if (session('success'))
                 <div class="mb-4 text-green-600">
@@ -85,7 +87,6 @@
             </div>
 
         </div>
-    </div>
 
     {{-- いいね機能の非同期処理 --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -153,4 +154,6 @@
                 });
         });
     </script>
-</x-app-layout>
+</div>
+
+@endsection

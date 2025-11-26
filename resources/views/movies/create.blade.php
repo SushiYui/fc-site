@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
   <x-slot name="header">
     <h2 class="text-xl font-semibold text-gray-800 leading-tight">
       MOVIE新規投稿
@@ -34,4 +36,4 @@
       </button>
     </form>
   </div>
-</x-app-layout>
+@endsection

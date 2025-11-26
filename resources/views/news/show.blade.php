@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight" id="news-title">
       {{ $newsItem->title }}
@@ -53,4 +55,4 @@
       <a href="{{ route('news.index') }}" class="text-blue-600 hover:underline">← 一覧に戻る</a>
     </div>
   </div>
-</x-app-layout>
+@endsection

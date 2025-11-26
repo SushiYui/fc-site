@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
   <x-slot name="header">
     <h2 class="text-[40px] font-normal">News</h2>
   </x-slot>
@@ -27,4 +29,4 @@
         </li>
     </ul>
 </section>
-</x-app-layout>
+@endsection

@@ -1,5 +1,6 @@
-<x-app-layout>
-  <x-slot name="header">
+@extends('layouts.app')
+
+@section('content')  <x-slot name="header">
     <h2 class="text-xl font-semibold text-gray-800 leading-tight">
       MOVIE詳細
     </h2>
@@ -18,4 +19,4 @@
       <a href="{{ route('movies.index') }}" class="text-indigo-600 hover:underline">← MOVIE一覧へ戻る</a>
     </div>
   </div>
-</x-app-layout>
+@endsection

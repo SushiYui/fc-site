@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-hero-bg pt-5 pb-10">
+<nav x-data="{ open: false }" class="{{ $navColor ?? 'bg-hero-bg' }} pt-5 pb-10">
     {{-- <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vh] h-[80vh] bg-[#DDFFA2] opacity-40 rounded-[800px] filter blur-[70px] z-0"></div> --}}
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

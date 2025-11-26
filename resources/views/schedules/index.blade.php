@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('content')
   <x-slot name="header">
         <h2 class="text-[40px] font-normal">schedule</h2>  {{-- 1段目 --}}
  </x-slot>
@@ -107,4 +109,4 @@
 
     </div>
   </div>
-</x-app-layout>
+@endsection
