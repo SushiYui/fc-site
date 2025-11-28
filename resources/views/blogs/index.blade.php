@@ -1,11 +1,20 @@
 {{-- resources/views/blogs/index.blade.php --}}
-@extends('layouts.app', ['navColor' => 'bg-[#d6efa0]'])
-@section('content')
-<div class="relative bg-[#72c32fcc] pb-5">
-    <div class="absolute w-[50vw] h-[50vw] right-0 top-0 rounded-[800px] bg-[#BCE670] opacity-80 blur-[60px] z-0"></div>
-    <div class="absolute w-[50vw] h-[50vw] left-0 top-[10vw] rounded-[800px] bg-[#A4CE7A] opacity-80 blur-[60px] z-0"></div>
+@extends('layouts.app', ['navColor' => 'bg-transparent'])
 
-    <div class="relative z-20 max-w-7xl mx-auto sm:px-6 lg:px-8">
+@section('page-bg')
+<div class="absolute inset-0 bg-[#72c32fcc] z-0"></div> {{-- 背景色 --}}
+
+<div class="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+    <div class="absolute w-[55vw] h-[55vw] right-[-10vw] top-[-5vw]
+        rounded-[800px] bg-[#BCE670] opacity-80 blur-[70px]"></div>
+
+    <div class="absolute w-[55vw] h-[55vw] left-[-10vw] top-[10vw]
+        rounded-[800px] bg-[#A4CE7A] opacity-80 blur-[70px]"></div>
+</div>
+@endsection
+
+@section('content')
+<div class="relative z-20 max-w-7xl mx-auto sm:px-6 lg:px-8 pb-5">
 
         <h1 class="report-title font-semibold leading-tight text-gray-800 my-5">
             Mrs.REPORT</h1>

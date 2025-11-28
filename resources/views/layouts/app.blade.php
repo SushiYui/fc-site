@@ -22,13 +22,19 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased relative overflow-x-hidden">
+
+        {{-- ▼ ページ専用の背景（blogs/index から挿入される） --}}
+        @yield('page-bg')
+
+        {{-- ▼ メインコンテンツ（背景より前に表示したいので relative z-10） --}}
+        <div class="min-h-screen relative z-10">
+
             @include('layouts.navigation', ['navColor' => $navColor ?? null])
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-gray-100">
+                <header class="bg-transparent"> {{-- 背景を透過に変更 --}}
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -36,7 +42,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-transparent"> {{-- ここも透過に変更 --}}
                 @yield('content')
             </main>
         </div>
