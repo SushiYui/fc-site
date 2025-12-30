@@ -11,8 +11,15 @@ class MovieController extends Controller
     //
     public function index()
     {
-        $movies=Movie::orderBy('released_at','desc')->paginate(6);
-        return view('movies.index', compact('movies'));
+        // 最新MOVIE1件
+        $newMovie = Movie::orderBy('released_at', 'desc')->first();
+
+        // それ以外のMOVIE
+        $movies=Movie::where('id','!=', optional($newMovie)->id)
+        ->orderBy('released_at', 'desc')
+        ->paginate(10);
+
+        return view('movies.index', compact('newMovie', 'movies'));
     }
 
     public function create()
