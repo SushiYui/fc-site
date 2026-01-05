@@ -1,48 +1,23 @@
-@extends('layouts.app', ['navColor' => 'bg-transparent'])
+@extends('layouts.app')
 
-
-@section('content')
-<div class="py-8 max-w-6xl mx-auto sm:px-6 lg:px-8">
-
-    <h2 class="text-[30px] font-bold mb-[30px] text-gray-800 leading-tight">
-      Video
+@section('content')  <x-slot name="header">
+    <h2 class="text-xl font-semibold text-gray-800 leading-tight">
+      MV一覧
     </h2>
+  </x-slot>
 
-    {{-- カテゴリーで絞り込み --}}
-    <div class="flex flex-wrap justify-center gap-2 my-2">
-    {{-- ALLボタン --}}
-    <a href="{{ route('mv.index') }}"
-    class="px-4 py-1 rounded-full text-sm transition
-            {{ is_null($selectedMvCategory)
-            ? 'bg-red-200 text-red-900'
-            : 'bg-gray-100 text-black' }}">
-        All
-    </a>
-
-    {{-- 各カテゴリー --}}
-    @foreach($categories as $category)
-        <a href="{{ route('mv.index', ['category' => $category]) }}"
-           class="px-4 py-1 rounded-full text-sm transition
-           {{ $selectedMvCategory === $category
-                ? 'bg-blue-200 text-blue-900'
-                : 'bg-gray-100 text-black' }}">
-            {{ ucfirst($category) }}
-            </a>
-        @endforeach
-    </div>
-
+    <div class="py-8 max-w-6xl mx-auto sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @foreach ($mvs as $mv)
-        <div class="bg-white p-4 max-w-[320px]">
+        <div class="bg-white rounded-xl shadow p-4">
           <div class="aspect-w-16 aspect-h-9 mb-3">
-            <iframe class="w-full h-full rounded-xl"
+            <iframe class="w-full h-full"
                     src="{{ $mv->url }}"
                     frameborder="0"
                     allowfullscreen></iframe>
           </div>
-          <p class="text-sm text-[#64860E]">{{ $mv->category }}</p>
-           <h3 class="text-lg font-bold text-[#002928]">{{ $mv->title }}</h3>
-          <p class="text-sm text-[#64860E]"> {{ \Carbon\Carbon::parse($mv->released_at)->format('Y.n.j') }}</p>
+           <h3 class="text-lg font-bold mb-1">{{ $mv->title }}</h3>
+          <p class="text-sm text-gray-600"> {{ $mv->category }} / 公開日：{{ \Carbon\Carbon::parse($mv->released_at)->format('Y年n月j日') }}</p>
         </div>
       @endforeach
     </div>
@@ -51,5 +26,5 @@
     <div class="mt-6">
       {{ $mvs->links() }}
     </div>
-</div>
+  </div>
 @endsection
