@@ -8,10 +8,24 @@ use Illuminate\Http\Request;
 
 class MVController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mvs = MV::orderBy('released_at', 'desc')->paginate(6);
-        return view('mv.index', compact('mvs'));
+        $selectedMvCategory = $request->input('category');
+
+        $mvs = MV::when($selectedMvCategory, function($query, $selectedMvCategory){
+            $query->where('category', $selectedMvCategory);
+        })
+        ->orderBy('released_at', 'desc')->paginate(6);
+
+        // カテゴリー絞り込み
+        $category = $request->input('category');
+        if ($category) {
+                $mvs->where('category', $category);
+            }
+
+        $categories = ['MV', 'LIVE', 'DOCUMENTARY', 'COMMENTARY', 'TEASER'];
+
+        return view('mv.index', compact('mvs', 'categories', 'selectedMvCategory'));
     }
 
     /**
