@@ -228,16 +228,16 @@
 
      <div class="relative w-full bg-[#DDFFA2] py-20 mb-20 overflow-hidden">
         {{-- 6. 新規入会--}}
-        <section id="story" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
+        <section id="entry" class="w-[calc(100%-140px)] mx-auto mb-20 border-b border-black/20">
         <h2 class="font-suse font-medium leading-none text-[clamp(20px,7vw,30px)] text-[#002928]">
             Fan Club</h2>
                 <div class="flex justify-center mb-6">
                     <img src="/images/fc_site_logo.png" alt="Fan Club Logo" class="w-40 h-auto">
                 </div>
                 <ul class="mt-4 text-center flex justify-center">
-                    <li><a href="" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
+                    <li><a href="{{ route('register') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
                         新規入会<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
-                    <li><a href="" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
+                    <li><a href="{{ route('login') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
                         LOGIN<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
                 </ul>
         </section>

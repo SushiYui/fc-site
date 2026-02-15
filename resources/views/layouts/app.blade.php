@@ -29,8 +29,9 @@
 
         {{-- ▼ メインコンテンツ（背景より前に表示したいので relative z-10） --}}
         <div class="min-h-screen relative z-10">
-
+        @auth
             @include('layouts.navigation', ['navColor' => $navColor ?? null])
+        @endauth
 
             <!-- Page Heading -->
             @isset($header)

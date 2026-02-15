@@ -13,9 +13,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Main\FanclubController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FanclubController::class, 'index'])->name('home');
 
 Route::prefix('admin')->group(function () {
     Route::get('register', [RegisteredAdminController::class, 'create'])->name('news.create');
@@ -78,32 +76,34 @@ Route::get('/dashboard', function () {
 
 Route::get('/fanclub', [FanclubController::class, 'index'])->middleware(['auth'])->name('fanclub.home');
 
-Route::middleware('auth')->group(function () {
-// 一般会員向け：お知らせ一覧と詳細
+// 一般向け：お知らせ一覧と詳細
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');
     Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
-// 一般会員向け：ライブ情報
+// 一般向け：ライブ情報
     Route::get('/lives', [LiveController::class, 'index'])->name('lives.index');
     Route::get('/lives/{id}', [LiveController::class, 'show'])->name('lives.show');
 
-// 一般会員向け：MV一覧ページ
+// 一般向け：MV一覧ページ
     Route::get('/mv', [MVController::class, 'index'])->name('mv.index');
     Route::get('/mv/{id}', [MVController::class, 'show'])->name('mv.show');
 
-// 一般会員向け：スケジュール一覧ページ
+// 一般向け：スケジュール一覧ページ
     Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
     Route::get('/schedules/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
 
-    // 一般会員向け：ブログ
+
+    Route::middleware('auth')->group(function () {
+
+    // 会員向け：ブログ
     Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
     Route::get('/blogs/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
-    // 一般会員向け：movie
+    // 会員向け：movie
     Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
     Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
 
-    // 一般会員向け：movie
+    // 会員向け：movie
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
     Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
@@ -113,7 +113,7 @@ Route::middleware('auth')->group(function () {
 
     //いいね
     Route::post('/blogs/{id}/like', [BlogLikeController::class, 'store']);
-    Route::post('/blogs/{id}/like', [BlogLikeController::class, 'destroy']);
+    Route::post('/delete/{id}/like', [BlogLikeController::class, 'destroy']);
 
 });
 
