@@ -96,3 +96,17 @@ Breezeは未ログインで auth 前提UIを読むと
 Route::get('/', [FanclubController::class, 'index'])->name('home');
 
 -----------------------------------------------------------------
+★2026/2/17（火）
+・php artisan serveしたときにエラーあり。
+　表示不可のため、解消方法検索。
+エラー：Attempt to read property "admin" on null
+原因：Auth::user() が null（＝ログインしてない） なのに->adminを読み込もうとした。
+修正版：@auth は「ログインしている時だけ」の意味。
+@auth
+    @if(Auth::user()->admin)
+        ...
+    @endif
+@endauth
+・消えたheaderを取り戻す。
+
+-----------------------------------------------------------------

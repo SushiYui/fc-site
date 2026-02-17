@@ -70,6 +70,7 @@
                             MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                         </a>
                     </p>
+                @auth
                     @if(Auth::user()->admin)
                     <p class="relative">
                     <a href="{{ route('lives.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
@@ -77,7 +78,7 @@
                     </a>
                     </p>
                     @endif
-
+                @endauth
                 </div>
 
                 @endif
@@ -98,6 +99,7 @@
                             MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                         </a>
                     </p>
+                @auth
                     @if(Auth::user()->admin)
                     <p class="relative">
                     <a href="{{ route('news.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
@@ -105,6 +107,7 @@
                     </a>
                     </p>
                     @endif
+                @endauth
                 </div>
         </div>
             {{-- 直近3つ＋過去リンク --}}
@@ -148,6 +151,7 @@
                             MORE<span class="dli-chevron-round-right ml-[0.8em] text-[#DDFFA2]"></span>
                         </a>
                     </p>
+                @auth
                     @if(Auth::user()->admin)
                     <p class="relative">
                         <a href="{{ route('news.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 no-underline hover:underline inline-block text-center ml-[10px] text-[#DDFFA2] bg-[#1E4737]" hover:underline>
@@ -155,6 +159,8 @@
                         </a>
                     </p>
                     @endif
+
+                @endauth
                 </div>
         </div>
 
@@ -194,6 +200,7 @@
                             MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                         </a>
                         </p>
+                @auth
                     @if(Auth::user()->admin)
                     <p class="relative">
                         <a href="{{ route('mv.create') }}"
@@ -202,6 +209,7 @@
                         </a>
                     </p>
                     @endif
+                @endauth
                 </div>
         </div>
 
@@ -305,13 +313,15 @@
                                 MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                             </a>
                         </p>
-                        @if(Auth::user()->admin)
+                @auth
+                    @if(Auth::user()->admin)
                         <p class="relative">
                         <a href="{{ route('movies.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
                         ＋ 新規作成
                         </a>
-                    </p>
-                @endif
+                        </p>
+                    @endif
+                @endauth
             </div>
         </div>
 
@@ -346,13 +356,15 @@
                                 MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                             </a>
                         </p>
-                        @if(Auth::user()->admin)
+                @auth
+                    @if(Auth::user()->admin)
                         <p class="relative">
                         <a href="{{ route('blogs.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
                         ＋ 新規作成
                         </a>
-                    </p>
-                @endif
+                        </p>
+                    @endif
+                @endauth
             </div>
         </div>
 
@@ -382,13 +394,15 @@
                                 MORE<span class="dli-chevron-round-right ml-[0.8em] text-black"></span>
                             </a>
                         </p>
-                        @if(Auth::user()->admin)
-                        <p class="relative">
-                        <a href="{{ route('gallery.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
-                        ＋ 新規作成
-                        </a>
+                @auth
+                    @if(Auth::user()->admin)
+                    <p class="relative">
+                    <a href="{{ route('gallery.create') }}" class="w-full h-full px-[1.2em] py-[0.8em] rounded-full border border-black/20 text-[#002928] no-underline hover:underline inline-block text-center ml-[10px]" hover:underline>
+                    ＋ 新規作成
+                    </a>
                     </p>
-                @endif
+                    @endif
+                @endauth
             </div>
         </div>
 
