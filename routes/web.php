@@ -11,6 +11,7 @@ use App\Http\Controllers\Main\MovieController;
 use App\Http\Controllers\Main\GalleryController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Main\FanclubController;
+use App\Http\Controllers\Main\JoinController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FanclubController::class, 'index'])->name('home');
@@ -92,6 +93,12 @@ Route::get('/fanclub', [FanclubController::class, 'index'])->middleware(['auth']
     Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
     Route::get('/schedules/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
 
+// 一般向け：新規入会ページ
+    Route::get('/join/guide', [JoinController::class, 'guide'])->name('join.guide');
+    Route::get('/join/email', [JoinController::class, 'emali'])->name('join.email');
+    Route::post('/join/email', [JoinController::class, 'sendMail'])->name('join.send');
+    Route::get('/join/register/{token}', [JoinController::class, 'registerForm'])->name('join.register');
+    Route::get('/join/register', [JoinController::class, 'register'])->name('join.store');
 
     Route::middleware('auth')->group(function () {
 
