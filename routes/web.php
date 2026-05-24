@@ -95,7 +95,7 @@ Route::get('/fanclub', [FanclubController::class, 'index'])->middleware(['auth']
 
 // 一般向け：新規入会ページ
     Route::get('/join/guide', [JoinController::class, 'guide'])->name('join.guide');
-    Route::get('/join/email', [JoinController::class, 'emali'])->name('join.email');
+    Route::get('/join/email', [JoinController::class, 'email'])->name('join.email');
     Route::post('/join/email', [JoinController::class, 'sendMail'])->name('join.send');
     Route::get('/join/register/{token}', [JoinController::class, 'registerForm'])->name('join.register');
     Route::get('/join/register', [JoinController::class, 'register'])->name('join.store');

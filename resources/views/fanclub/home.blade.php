@@ -243,7 +243,7 @@
                     <img src="/images/fc_site_logo.png" alt="Fan Club Logo" class="w-40 h-auto">
                 </div>
                 <ul class="mt-4 text-center flex justify-center">
-                    <li><a href="{{ route('register') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
+                    <li><a href="{{ route('join.guide') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
                         新規入会<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
                     <li><a href="{{ route('login') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px] mb-[20px] px-12 py-3 text-[#DDFFA2] no-underline hover:underline inline-flex justify-center items-center w-[190px]" hover:underline>
                         LOGIN<span class="dli-chevron-round-right ml-[0.8em]"></span></a></li>
