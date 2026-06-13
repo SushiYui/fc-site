@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'postal_code',
         'city',
+        'street',
         'building',
         'phone_number',
         'funclub_member',

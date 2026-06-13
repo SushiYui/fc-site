@@ -122,42 +122,54 @@
 
         {{-- お支払方法 --}}
          <div class="pb-10 px-[7%] py-[10%] bg-[#FFFFFF] mb-[100px] rounded-[20px]">
+            {{-- 年会費コース --}}
+            <div class="mb-5">
                 <h3 class="mb-5 font-bold leading-tight text-[25px] text-center">年会費コース</h3>
-                    <div>
-                        <div>
-                            <p>入会金</p>
-                            <p>1,0000円</p>
+                    <div class="flex gap-2 mb-2">
+                        <div class="p-[20px] border rounded-[20px] bg-[#daece5] text-center w-full">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                                入会金</p>
+                            <p class="mt-3 font-bold text-2xl">1,000円(税込み)</p>
                         </div>
-                        <div>
-                            <p>年会費</p>
-                            <p>5,000円(税込み)</p>
+                        <div class="p-[20px] border rounded-[20px] bg-[#daece5] text-center w-full">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                                年会費</p>
+                            <p class="mt-3 font-bold text-2xl">5,000円(税込み)</p>
                         </div>
                     </div>
-                    <div>
-                        <p>会員期間</p>
-                        <p>ご入会月を含む12か月<br>
+                    <div class="mb-2 p-[20px] border rounded-[20px] bg-[#daece5] text-center">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                            会員期間</p>
+                        <p class="mt-3 font-bold text-[18px]">
+                            ご入会月を含む12か月<br>
                             <span class="text-[13px]">※2026年5月30日にご入会の場合、会員期間は2027年4月30日まで。</span></p>
                     </div>
-                    <div>
-                        <p>お支払方法</p>
-                        <ul>
+                    <div class="p-[20px] border rounded-[20px] bg-[#daece5]">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                            お支払方法</p>
+                        <ul class="w-fit mx-auto mt-3 font-bold leading-loose list-disc">
                             <li>クレジットカード支払い</li>
                             <li>コンビニ支払い</li>
                         </ul>
-                        <p class="text-[13px]">※クレジットカード支払いの場合は自動毛族となります。
+                        <p class="mt-3 text-[13px]">※クレジットカード支払いの場合は自動毛族となります。
                             自動継続を停止したい場合は、<span>会員期限の20日までに </span>「マイページ」から
                             ご自身で設定してください。期限を過ぎますと自動継続となりますのでご注意ください。
                             <br>※コンビニ支払手数料300円(税込み)
                         </p>
                     </div>
+            </div>
+            {{-- 月会費コース --}}
+            <div>
                 <h3 class="mb-5 font-bold leading-tight text-[25px] text-center">月会費コース</h3>
-                    <div>
-                        <p>月会費</p>
-                        <p>550円(税抜き)</p>
+                    <div class="mb-2 p-[20px] border rounded-[20px] bg-[#daece5] text-center">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                            月会費</p>
+                        <p class="mt-3 font-bold text-2xl">550円(税込み)</p>
                     </div>
-                    <div>
-                        <p>お支払方法</p>
-                        <ul>
+                    <div class="p-[20px] border rounded-[20px] bg-[#daece5]">
+                        <p class="block w-[140px] mx-auto bg-[#006b45] text-white text-center font-bold rounded-full py-1">
+                            お支払方法</p>
+                        <ul class="w-fit mx-auto mt-3 font-bold leading-loose list-disc">
                             <li>クレジットカード支払い</li>
                             <li>d払い</li>
                             <li>auかんたん決済</li>
@@ -165,6 +177,7 @@
                         </ul>
 
                     </div>
+            </div>
         </div>
 
 
