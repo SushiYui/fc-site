@@ -17,10 +17,10 @@
         </div>
 
         <!-- Email Address -->
-        <form action="" method="get">
+        <form action="{{ route('join.store') }}" method="post">
+        @csrf
             <input type="email" name="email" placeholder="メールアドレス"
             class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-6">
-        </form>
 
         <ul class="mb-5">
             <li>[登録する]をクリックするとCreamSODA member ID利用規約に同意したものとみなされます。</li>
@@ -38,5 +38,7 @@
                 登録する
             </button>
             </div>
+
+        </form>
     </div>
 @endsection

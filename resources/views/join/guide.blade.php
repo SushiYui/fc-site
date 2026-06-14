@@ -180,6 +180,11 @@
             </div>
         </div>
 
+        <div class="mt-4 flex justify-center">
+            <a href="{{ route('join.email') }}" class="bg-[#1E4737] rounded-[100px] mr-[30px]
+            mb-[20px] px-12 py-3 text-[#E2FF91] no-underline hover:underline inline-flex justify-center items-center" hover:underline>
+            新規入会はこちら<span class="dli-chevron-round-right ml-[0.8em]"></span></a>
+        </div>
 
 
     </div>
