@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Models\PreMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PreMemberRegisterMail;
 use Illuminate\Support\Facades\Redirect;
 
 class JoinController extends Controller
@@ -24,10 +26,14 @@ class JoinController extends Controller
     public function store(Request $request)
     {
 
-    // あとでめーアドレス保存、トークン生成、メールアドレス送信処理記載
+        $token = Str::random(64);
+
     PreMember::create([
         'email' => $request->email,
+        'token' => $token,
     ]);
+
+    Mail::to($request->email) ->send(new PreMemberRegisterMail($token));
 
         return Redirect()->route('join.complete');
     }
