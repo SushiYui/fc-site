@@ -13,9 +13,9 @@ class PreMemberRegisterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
+
     public $token;
-     */
+
     public function __construct($token)
     {
         // bladeで{{ $token }}だけでも使えるようにしている
@@ -40,7 +40,7 @@ class PreMemberRegisterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.register',
         );
     }
 

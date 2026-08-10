@@ -33,6 +33,8 @@ class JoinController extends Controller
         'token' => $token,
     ]);
 
+// 入力されたメールアドレス宛に、PreMemberRegisterMailというメールを送ってね！
+
     Mail::to($request->email) ->send(new PreMemberRegisterMail($token));
 
         return Redirect()->route('join.complete');
