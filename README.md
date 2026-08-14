@@ -182,3 +182,19 @@ complete.blade.php 作成！
 本登録画面にhiddenでtokenを持ってくる。
 tokenが仮登録時に生成したものと一致するか確認するため！
 -----------------------------------------------------------------
+★2026/6/27（土）
+１，laravelにはクラスがある。
+　→Controller
+　→Mailable
+　→Model
+・JoinControllerはControllerクラスの一種
+　お客さんがメールアドレスを入力したら、「メールアドレス保存して！」
+　「token作って！」、「この人にメールを送って！」と指示する。
+・PreMemberRegisterMailはMailableクラスの一種
+　JoinControllerから指示が来たら、メール本文を作成
+２，Strが見つからないとエラーあり。
+　use IlluminaSupportte\\Str;を追加して解消
+３，仮登録実行、laravel.logを確認して、token入りのメール本文が
+　出来ていることを確認。
+
+-----------------------------------------------------------------
