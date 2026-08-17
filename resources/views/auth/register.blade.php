@@ -2,6 +2,9 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
+        {{-- tokenもユーザーが入力したフォームと一緒に送る必要がある。 --}}
+        <input type="hidden" name="token" value="{{ $token }}">
+
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('名前')" />

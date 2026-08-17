@@ -33,6 +33,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $token = $request->token;
+
+        dd($token);
+        
         $request->validate([
         'name' => ['required', 'string', 'max:20'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -57,8 +61,10 @@ class RegisteredUserController extends Controller
         'funclub_member' => $request->has('funclub_member'),
             ]);
 
+        // 「ユーザー登録されたよ！」というLaravelのイベントを発生させる。
         event(new Registered($user));
 
+        // 今登録したユーザーをログイン状態にする。
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
